@@ -1,7 +1,17 @@
 package(default_visibility = ["//visibility:public"])
+load(':bazel/glog.bzl', 'glog_library')
+glog_library()
 
 cc_library(
   name = "glog",
+  deps = select({
+    "@bazel_tools//src/conditions:windows": [":glogwin"],
+     "//conditions:default": [":glogint"],
+  })
+)
+
+cc_library(
+  name = "glogwin",
   hdrs = [
     "glog/log_severity.h",
     "glog/logging.h",
