@@ -14,7 +14,7 @@ def glog_library(namespace='google', with_gflags=1):
         gendir = '$(GENDIR)'
 
     native.cc_library(
-        name = 'glog',
+        name = 'glogint',
         visibility = [ '//visibility:public' ],
         srcs = [
             ':config_h',
