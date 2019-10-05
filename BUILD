@@ -5,7 +5,7 @@ load(':bazel/glog.bzl', 'glog_library')
 cc_library(
   name = "glog",
   deps = select({
-    "@bazel_tools//src/conditions:windows": [":glogwin"],
+    "@bazel_tools//src/conditions:windows": [":glogdll"],
      "//conditions:default": [":glogint"],
   })
 )
@@ -110,11 +110,12 @@ windows_dll_library(
     "HAVE_SNPRINTF",
     "WINDOWS",
     "_WINDOWS",
-    "GOOGLE_GLOG_IS_A_DLL=1",
-    'GOOGLE_GLOG_DLL_DECL="__declspec(dllexport)"',
+    "NDEBUG",
     "GFLAGS_DLL_DECLARE_FLAG=",
     "GFLAGS_DLL_DEFINE_FLAG=",
     "GLOG_NO_ABBREVIATED_SEVERITIES",
+    'GOOGLE_GLOG_DLL_DECL="__declspec(dllexport)"',
+    "GOOGLE_GLOG_IS_A_DLL=1",
     "GFLAGS_IS_A_DLL=0",
     "HAVE_LIB_GFLAGS",
   ],

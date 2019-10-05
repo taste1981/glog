@@ -59,4 +59,5 @@ def windows_dll_library(
         deps = deps + [
             ":" + import_target_name,
         ],
+        **kwargs
     )
