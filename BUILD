@@ -11,6 +11,33 @@ cc_library(
 )
 
 cc_library(
+  name = "glogwinhdrs",
+  hdrs = [
+    "glog/log_severity.h",
+    "glog/logging.h",
+    "glog/raw_logging.h",
+    "glog/stl_logging.h",
+    "glog/vlog_is_on.h",
+  ],
+  copts = ["-Isrc/windows", "-Iexternal/glog/src/windows"],
+  defines = [
+    "HAVE_SNPRINTF",
+    "WINDOWS",
+    "_WINDOWS",
+    "NDEBUG",
+    "GFLAGS_DLL_DECLARE_FLAG=",
+    "GFLAGS_DLL_DEFINE_FLAG=",
+    "GLOG_NO_ABBREVIATED_SEVERITIES",
+    "GOOGLE_GLOG_DLL_DECL=",
+    "GFLAGS_IS_A_DLL=0",
+    "HAVE_LIB_GFLAGS",
+  ],
+  deps = [
+    "@gflags//:gflags",
+  ],
+)
+
+cc_library(
   name = "glogwin",
   hdrs = [
     "glog/log_severity.h",
