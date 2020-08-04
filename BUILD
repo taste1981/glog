@@ -11,6 +11,14 @@ cc_library(
 )
 
 cc_library(
+    name = "windows_event_log_sink",
+    hdrs = ["windows_event_log_sink.h"],
+    linkopts = [
+      "-DEFAULTLIB:ws2_32.lib",
+    ]
+)
+
+cc_library(
   name = "glogwinhdrs",
   hdrs = [
     "glog/log_severity.h",
