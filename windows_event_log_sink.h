@@ -30,6 +30,10 @@ public:
     port_opened_ = false;
   }
 
+  void SetSessionId(const std::string& sessionid) {
+    session_token_ = sessionid;
+  }
+
   void OpenLogUpdatePort() {
     if (port_opened_)
       return;
