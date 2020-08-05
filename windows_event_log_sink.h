@@ -73,7 +73,7 @@ public:
                     const struct ::tm *tm_time, const char *message,
                     size_t message_len) {
     if (event_log_) {
-      std::string full_msg = session_token_ + " " + std::string(base_filename) +
+      std::string full_msg = std::string(base_filename) +
                              ":" + std::to_string(line) + " " +
                              std::string(message, message_len);
       const char *msg_strings[] = {full_msg.c_str()};
