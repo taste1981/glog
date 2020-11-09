@@ -34,6 +34,14 @@ public:
     session_token_ = sessionid;
   }
 
+  void SetProcName(const std::string &proc_name) {
+    proc_name_ = proc_name;
+  }
+
+  void SetNodeName(const std::string &node_name) {
+    node_name_ = node_name;
+  }
+
   void OpenLogUpdatePort() {
     if (port_opened_)
       return;
@@ -95,6 +103,8 @@ public:
         lm.set_filename(base_filename);
         lm.set_linenum(std::to_string(line));
         lm.set_logmsg(full_msg);
+        lm.set_procname(proc_name_);
+        lm.set_nodename(node_name_);
 
         std::string jsonstr;
         MessageToJsonString(lm, &jsonstr, options_);
@@ -119,6 +129,8 @@ public:
 
 private:
   std::string session_token_;
+  std::string proc_name_;
+  std::string node_name_;
   HANDLE event_log_ = nullptr;
   SOCKET sock_ = INVALID_SOCKET;
   struct sockaddr_in servaddr_;
