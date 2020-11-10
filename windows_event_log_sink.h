@@ -104,7 +104,7 @@ public:
         lm.set_linenum(std::to_string(line));
         lm.set_logmsg(full_msg);
         lm.set_procname(proc_name_);
-        lm.set_nodename(node_name_);
+        lm.set_hostname(node_name_);
 
         std::string jsonstr;
         MessageToJsonString(lm, &jsonstr, options_);
