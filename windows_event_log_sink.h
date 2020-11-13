@@ -99,7 +99,7 @@ public:
       if (sock_ != INVALID_SOCKET) {
         endgame::LogMessage lm;
         lm.set_sessionid(session_token_);
-        lm.set_username_(username_);
+        lm.set_username(username_);
         if (severity == google::GLOG_INFO) {
           lm.set_severity("INFO");
         } else if (severity == google::GLOG_WARNING) {
