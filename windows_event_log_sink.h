@@ -40,6 +40,10 @@ public:
     session_token_ = sessionid;
   }
 
+  void SetUserName(const std::string& username) {
+    username_ = username;
+  }
+
   void SetProcName(const std::string &proc_name) {
     proc_name_ = proc_name;
   }
