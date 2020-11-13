@@ -22,6 +22,12 @@ public:
   WindowsEventLogSink() {
     OutputDebugStringA("Starting WindowsEventLogSink");
     auto session_token = getenv("ENDGAME_SESSION_TOKEN");
+    auto username = getenv("ENDGAME_USER");
+    if (username != nullptr) {
+      username_ = username;
+    } else {
+      username_ = "UNKNOWN";
+    }
     if (session_token != nullptr) {
       session_token_ = std::string(session_token);
     }
@@ -93,6 +99,7 @@ public:
       if (sock_ != INVALID_SOCKET) {
         endgame::LogMessage lm;
         lm.set_sessionid(session_token_);
+        lm.set_username_(username_);
         if (severity == google::GLOG_INFO) {
           lm.set_severity("INFO");
         } else if (severity == google::GLOG_WARNING) {
@@ -131,6 +138,7 @@ private:
   std::string session_token_;
   std::string proc_name_;
   std::string node_name_;
+  std::string username_;
   HANDLE event_log_ = nullptr;
   SOCKET sock_ = INVALID_SOCKET;
   struct sockaddr_in servaddr_;
