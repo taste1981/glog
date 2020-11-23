@@ -23,6 +23,7 @@ public:
     OutputDebugStringA("Starting WindowsEventLogSink");
     auto session_token = getenv("ENDGAME_SESSION_TOKEN");
     auto username = getenv("ENDGAME_USER");
+    auto gamekey = getenv("ENDGAME_GAME_KEY");
     if (username != nullptr) {
       username_ = username;
     } else {
@@ -30,6 +31,9 @@ public:
     }
     if (session_token != nullptr) {
       session_token_ = std::string(session_token);
+    }
+    if (gamekey != nullptr) {
+      game_key_ = gamekey;
     }
     std::string session_str = "EndGameSession" + session_token_;
     event_log_ = RegisterEventSource(NULL, session_str.c_str());
@@ -50,6 +54,10 @@ public:
 
   void SetNodeName(const std::string &node_name) {
     node_name_ = node_name;
+  }
+
+  void SetGameKey(const std::string &game_key) {
+    game_key_ = game_key;
   }
 
   void OpenLogUpdatePort() {
@@ -117,6 +125,7 @@ public:
         lm.set_logmsg(full_msg);
         lm.set_procname(proc_name_);
         lm.set_hostname(node_name_);
+        lm.set_game_key(game_key_);
 
         std::string jsonstr;
         MessageToJsonString(lm, &jsonstr, options_);
@@ -142,6 +151,7 @@ public:
 private:
   std::string session_token_;
   std::string proc_name_;
+  std::string game_key_;
   std::string node_name_;
   std::string username_;
   HANDLE event_log_ = nullptr;
