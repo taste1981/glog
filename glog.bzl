@@ -15,5 +15,5 @@ def load_deps_for_glog_gflags():
   git_repository(
       name = "gflags",
       commit = "7e709881881c2663569cd49a93e5c8d9228d868e",
-      remote = "https://github.intel.com/mdharmap/gflags.git",
+      remote = "https://github.com/taste1981/gflags.git",
   )
